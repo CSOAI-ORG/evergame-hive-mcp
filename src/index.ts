@@ -126,20 +126,18 @@ const server = new Server({ name: "evergame-hive-mcp", version: "1.0.0" }, { cap
 server.setRequestHandler(ListToolsRequestSchema, async () => ({ tools: HIVE_TOOLS }));
 
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
-  // args is typed as `unknown` by the MCP SDK; the inputSchema above constrains
-  // the shape. Cast at the boundary to keep the per-case code clean.
-  const { name } = request.params;
-  const args = (request.params.arguments ?? {}) as Record<string, any>;
+  const { name, arguments: args } = request.params;
+  const params = (args ?? {}) as Record<string, any>;
   try {
     switch (name) {
       case "hive_price_feed":
-        return { content: [{ type: "text", text: JSON.stringify(await engine.getPriceFeed(args.game, args.item_name, args.item_id), null, 2) }] };
+        return { content: [{ type: "text", text: JSON.stringify(await engine.getPriceFeed(params.game, params.item_name, params.item_id), null, 2) }] };
       case "hive_arbitrage_scanner":
-        return { content: [{ type: "text", text: JSON.stringify(await engine.scanArbitrage(args.min_profit_usd || 5, args.games), null, 2) }] };
+        return { content: [{ type: "text", text: JSON.stringify(await engine.scanArbitrage(params.min_profit_usd || 5, params.games), null, 2) }] };
       case "hive_trend_engine":
-        return { content: [{ type: "text", text: JSON.stringify(await engine.predictTrends(args.game, args.item_category, args.forecast_days || 7), null, 2) }] };
+        return { content: [{ type: "text", text: JSON.stringify(await engine.predictTrends(params.game, params.item_category, params.forecast_days || 7), null, 2) }] };
       case "hive_data_export":
-        return { content: [{ type: "text", text: JSON.stringify({ game: args.game, format: args.format, sov3_note: "Your data. Your control. Full portability.", records: 15420 }, null, 2) }] };
+        return { content: [{ type: "text", text: JSON.stringify({ game: params.game, format: params.format, sov3_note: "Your data. Your control. Full portability.", records: 15420 }, null, 2) }] };
       default:
         throw new Error(`Unknown tool: ${name}`);
     }

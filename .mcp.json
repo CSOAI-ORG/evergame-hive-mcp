@@ -1,0 +1,35 @@
+{
+  "name": "evergame-hive-mcp",
+  "description": "MEOK GAMING HIVE — Cross-Game Data Moat MCP. Aggregated market intelligence, price history, trend analysis, arbitrage signals across all supported MMOs. SOV3-enabled sovereign gaming data (your data, your control, full export, full delete). 4 tools. Blockchain-attested audit trail via meok-attestation-api. The intelligence layer of the MEOK Gaming hive within the MEOK/CSOAI 28-hive mesh.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/CSOAI-ORG/evergame-hive-mcp",
+  "license": "MIT",
+  "author": "MEOK AI Labs <gaming@meok.ai>",
+  "type": "mcp",
+  "runtime": "node",
+  "transport": "stdio",
+  "entry": "dist/index.js",
+  "package": "@csoai-org/evergame-hive-mcp",
+  "tools": 4,
+  "games": ["wow", "ffxiv", "eve", "osrs", "poe", "diablo"],
+  "coai_gates": ["INTELLIGENCE_ONLY", "NO_AUTOMATION", "AUDIT_TRAIL", "PLAYER_CONTROL"],
+  "sov3": {
+    "enabled": true,
+    "attestation_endpoint": "https://meok-attestation-api.vercel.app/sign",
+    "data_export": "player_owned",
+    "sigil_chain": "ed25519",
+    "key_path": "~/.sov3/replica_keys/"
+  },
+  "tags": ["mcp", "hive", "gaming", "data-moat", "cross-game", "market-intelligence", "meok-ai-labs", "csoai", "sov3", "sovereign-data"],
+  "endpoints": {
+    "smithery": "https://smithery.ai/server/@csoai-org/evergame-hive-mcp",
+    "npm": "https://www.npmjs.com/package/@csoai-org/evergame-hive-mcp",
+    "github": "https://github.com/CSOAI-ORG/evergame-hive-mcp"
+  },
+  "hive": {
+    "name": "meok-gaming-hive",
+    "role": "data-moat-aggregator",
+    "mesh": "MEOK-28-hive",
+    "subordinate_to": "meok-attestation-api"
+  }
+}

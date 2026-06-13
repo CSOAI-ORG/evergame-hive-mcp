@@ -1,0 +1,31 @@
+name: evergame-hive-mcp
+description: MEOK GAMING HIVE — Cross-Game Data Moat MCP. Aggregated market intelligence, price history, trend analysis, arbitrage signals across all supported MMOs. SOV3-enabled sovereign gaming data (your data, your control). 4 tools, blockchain-attested audit trail via meok-attestation-api. The intelligence layer of the MEOK Gaming hive within the MEOK/CSOAI 28-hive mesh.
+author: MEOK AI Labs <gaming@meok.ai>
+homepage: https://github.com/CSOAI-ORG/evergame-hive-mcp
+license: MIT
+keywords:
+  - mcp
+  - hive
+  - gaming
+  - data-moat
+  - cross-game
+  - market-intelligence
+  - meok-ai-labs
+  - csoai
+  - sov3
+  - sovereign-data
+runtime: typescript
+entry: dist/index.js
+config:
+  type: object
+  properties: {}
+  required: []
+startCommand:
+  type: stdio
+  configSchema: ./configSchema.json
+  commandFunction: |-
+    (config) => ({
+      command: 'node',
+      args: ['dist/index.js'],
+      env: {}
+    })
